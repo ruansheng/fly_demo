@@ -12,4 +12,8 @@ func AddRouter(fly *fly.Fly) {
 	group := fly.Group("/group")
 	group.Use(middleware.IpLimit())
 	group.GET("/def", controller.Def, middleware.MustLogin)
+
+	groupA := group.Group("/groupA")
+	groupA.Use(middleware.CheckToken())
+	groupA.GET("/ghi", controller.Ghi, middleware.MustLogin)
 }
